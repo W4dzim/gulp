@@ -15,7 +15,7 @@ gulp.task('scss', function(){
     return gulp.src('app/scss/**/*.scss') 
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(autoprefixer({
-            browsers: ['last 7 versions']
+            overrideBrowserslist: ['last 7 versions']
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('app/css'))
@@ -50,7 +50,7 @@ gulp.task('js', function(){
     .pipe(uglify())
     .pipe(gulp.dest('app/js'))
     .pipe(browserSync.reload({stream: true}))
-})
+});
 
 gulp.task('browser-sync', function() {
     browserSync.init({
@@ -67,15 +67,14 @@ gulp.task('export', function() {
     let buildCss = gulp.src('app/css/**/*.css')
         .pipe(gulp.dest('dist/css'));
 
-    let buildJs = gulp.src('app/css/**/*.js')
+    let buildJs = gulp.src('app/js/**/*.js')
         .pipe(gulp.dest('dist/js'));
 
     let buildFonts = gulp.src('app/fonts/**/*.*')
         .pipe(gulp.dest('dist/fonts'));
 
     let buildImg = gulp.src('app/img/**/*.*')
-        .pipe(gulp.dest('dist/img'));
-        
+        .pipe(gulp.dest('dist/img'));        
 });
 
 gulp.task('watch', function(){
